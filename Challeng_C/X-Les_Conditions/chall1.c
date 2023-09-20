@@ -1,14 +1,24 @@
 #include <stdio.h>
-int main(){
-    int number;
-    printf("Veuiller Entrer le number : ");
-    scanf("%d", &number);
-    if(number % 2 == 0) {
-         printf("%d est pair.\n", number); 
-    
-     } else {
-    printf("%d est impair.\n", number);
-    return 0;
+
+int main() {
+    int a;
+
+    printf("Entrez un nombre : ");
+    scanf("%d", &a);
+
+    switch(a % 2) {
+        case 0:
+            printf("Le nombre est pair.\n");
+            break;
+        case 1:
+        case -1:
+            printf("Le nombre est impair.\n");
+            break;
+        default:
+            printf("Le nombre est nul.\n");
+            break;
     }
+
+    return 0;
 }
 

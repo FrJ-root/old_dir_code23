@@ -1,21 +1,27 @@
-
 #include <stdio.h>
-#include <ctype.h> 
 
-int main() {
+int main()
+{
     char caractere;
 
-    printf("Veuillez entrer un caractère : ");
-    scanf(" %c", &caractere);
+    printf("Entrer un caractere : ");
+    scanf("%c", &caractere);
 
-    caractere = tolower(caractere);
+    switch(caractere)
+    {
 
-    if (caractere == 'a' || caractere == 'e' || caractere == 'i' || caractere == 'o' || caractere == 'u') {
-        printf("%c est une voyelle.\n", caractere);
-    } else {
-        printf("%c n'est pas une voyelle.\n", caractere);
+    case 'e':
+    case 'a':
+    case 'i':
+    case 'u':
+    case 'o':
+      printf(">> voyelle.\n");
+        break;
+    default:
+        printf("n'est pas une voyelle.\n");
+        break;
+
     }
 
     return 0;
 }
-
