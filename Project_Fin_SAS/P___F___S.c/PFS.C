@@ -79,14 +79,6 @@ void Display(){
         printf("                            5-> Status : %s\n",T_Status[i]);
     }
 }
-void choix_Display(){
-        printf("      _\n");
-        printf("     |1|->  Par ordre alphabetique\n");
-        printf("      _\n");
-        printf("     |2|->  Par deadline\n");
-        printf("      _\n");
-        printf("     |3|->  Dont le deadline est dans 3 jours ou moins\n");
-}
 void display_alpha(){
         int i, j;
         int tempJour;
@@ -168,20 +160,76 @@ void display_deadline_3jours(){
             }
         }
 }
+void choix_Display(){
+        printf("      _\n");
+        printf("     |1|->  Par ordre alphabetique\n");
+        printf("      _\n");
+        printf("     |2|->  Par deadline\n");
+        printf("      _\n");
+        printf("     |3|->  Dont le deadline est dans 3 jours ou moins\n");
+        printf("Entrer votre choix:");scanf("%d",&choix);
+                switch (choix){
+                case 1:
+                    display_alpha();Display();break;
+                case 2:
+                    display_deadline();Display();break;
+                case 3:
+                    display_deadline_3jours();Display();break;
+                default:
+                    printf("Trie Erreur!.\n");}
+}
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Modification des Taches ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 void ModifyTache(){
-        int i, id, choix;
+        int i, id, choix, NV_Deadline;
         char NV_Statut[100], NV_Description[500];
-        int NV_Deadline;
-    }
-void choix_modify(){
+        
         printf("      _\n");
         printf("     |1|->  description d'une Tache\n");
         printf("      _\n");
         printf("     |2|->  statut d'une Tache\n");
         printf("      _\n");
         printf("     |3|->  deadline d'une Tache\n");
+        printf("Entrer votre choix : ");scanf("%d", &choix);
+        switch(choix){
+            case 1 :
+                       printf("Veuiller Entrer id de Tache : ");scanf("%d",&id);
+                       printf("\n");
+                       for(i=0; i<T_Number ; i++){
+                         if(T_Identifiant[i]==id){
+                                   printf("Veuiller Editer : \n");scanf("%s",NV_Description);
+                    strcpy(T_Description[i],NV_Description);
+                       printf("                     _                       \n");
+                       printf("                    |_|_                       \n");
+                       printf("                        |===|>       Edit Succes ^_-\n");break;
+                       }else  printf("id Errour!",id);}break;
+            case 2 :
+                        printf("Veuiller Entrer id de Tache:");scanf("%d",&id);
+                       printf("\n");
+                       for(i=0; i<T_Number; i++)
+                       {
+                        if(T_Identifiant[i]==id)
+                        {
+                       printf("Veuiller Editer :\n");scanf("%s",NV_Statut);
+                       strcpy(T_Description[i],NV_Statut);
+                       printf("                     _                       \n");
+                       printf("                    |_|_                       \n");
+                       printf("                        |===|>       Edit Succes ^_-\n");break;
+                        } else  printf("id Errour!",id);
+                       }break;
+            case 3 :
+                       printf("Veuiller Entrer id de Tache:");scanf("%d",&id);
+                       printf("\n");
+                       for(i=0; i<T_Number; i++)
+                         {
+                          if(T_Identifiant[i]==id)
+                              {
+                       printf("Veuiller Editer : \n");scanf("%d",&NV_Deadline);
+                      T_Deadline[i]=NV_Deadline;
+                       printf("                     _                       \n");
+                       printf("                    |_|_                       \n");
+                       printf("                        |===|>       Edit Succes ^_-\n");break;
+                       }else  printf("id Errour!",id);}break;}
 }
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Supp des Taches ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
@@ -207,14 +255,6 @@ void Supp(){
     }
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Search the Taches~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-void Recherche(){
-        int choixRecherche;
-        printf("      _\n");
-        printf("     |1|-> Par Id\n");
-        printf("      _\n");
-        printf("     |2|-> Par Titre\n");
-        printf("\n");
-    }
 void searchByIdentifiant(){
         int i, id, FrJ_Define;
         printf("Entrer id de Tache aue vous souhaitez rechercher : ");
@@ -257,17 +297,26 @@ void searchByTitre(){
                 printf("Aucune tache avec le titre \"%s\" n a ete trouvee.\n", RechTitre);
             }
         }
-    }
+}
+void Search(){
+        int choixRecherche;
+        printf("      _\n");
+        printf("     |1|-> Par Id\n");
+        printf("      _\n");
+        printf("     |2|-> Par Titre\n");
+        printf("\n");
+        printf("Choisissez une option : ");scanf("%d", &choixRecherche);
+                   switch (choixRecherche)
+                    {
+                     case 1:
+                         searchByIdentifiant();break;
+                     case 2:
+                         searchByTitre();break;
+                       default:
+                     printf("Option de recherche invalide!!.\n");}
+}
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Statistique ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-void Statistique(){
-        printf("      _\n");
-        printf("     |1|->  numbre Total des Taches\n");
-        printf("      _\n");
-        printf("     |2|->  numbre de Taches completes et incompletes\n");
-        printf("      _\n");
-        printf("     |3|->  numbre de jours restants jusqu'au delai de chaque tache\n");
-}
 void statQ_cmpl_incmpl(){
         int i;
         int completTache = 0;
@@ -305,6 +354,20 @@ void staQ_liste_Tache(){
             printf("                            5-> Status : %s\n", T_Status[i]);
         }
 }
+void Statistique(){
+        printf("      _\n");
+        printf("     |1|->  numbre Total des Taches\n");
+        printf("      _\n");
+        printf("     |2|->  numbre de Taches completes et incompletes\n");
+        printf("      _\n");
+        printf("     |3|->  numbre de jours restants jusqu'au delai de chaque tache\n");
+        printf("Entrer votre choix:");scanf("%d",&choix);
+                switch(choix){
+                case 1 :
+                    staQ_liste_Tache();break;
+                case 2 :
+                    statQ_cmpl_incmpl();break;}
+}
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Control_Main ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 int main(){
@@ -326,93 +389,46 @@ int main(){
                 Pls_Tache();break;
             case 3:
                 system("cls");
-                choix_Display();
-				Display;
-				printf("Entrer votre choix:");scanf("%d",&choix);
-                switch (choix){
-                case 1:
-                    display_alpha();Display();break;
-                case 2:
-                    display_deadline();Display();break;
-                case 3:
-                    display_deadline_3jours();Display();break;
-                default:
-                    printf("Trie Erreur!.\n");}break;
+                choix_Display();break;
             case 4:
                 system("cls");
-                choix_modify();
-                ModifyTache();
-                printf("Entrer votre choix : ");scanf("%d", &choix);
-                  switch(choix){
-                  case 1 :
-                       printf("Veuiller Entrer id de Tache : ");scanf("%d",&id);
-                       printf("\n");
-                       for(i=0; i<T_Number ; i++){
-                         if(T_Identifiant[i]==id){
-                                   printf("Veuiller Editer : \n");scanf("%s",NV_Description);
-                    strcpy(T_Description[i],NV_Description);
-                       printf("                     _                       \n");
-                       printf("                    |_|_                       \n");
-                       printf("                        |===|>       Edit Succes ^_^\n");Display();break;
-                       }else  printf("id Errour!",id);}break;
-                 case 2 :
-                        printf("Veuiller Entrer id de Tache:");scanf("%d",&id);
-                       printf("\n");
-                       for(i=0; i<T_Number; i++)
-                       {
-                        if(T_Identifiant[i]==id)
-                        {
-                       printf("Veuiller Editer :\n");scanf("%s",NV_Statut);
-                       strcpy(T_Description[i],NV_Statut);
-                       printf("                     _                       \n");
-                       printf("                    |_|_                       \n");
-                       printf("                        |===|>       Edit Succes ^_-\n");Display();break;
-                        } else  printf("id Errour!",id);
-                       }break;
-                 case 3 :
-                       printf("Veuiller Entrer id de Tache:");scanf("%d",&id);
-                       printf("\n");
-                       for(i=0; i<T_Number; i++)
-                         {
-                          if(T_Identifiant[i]==id)
-                              {
-                       printf("Veuiller Editer : \n");scanf("%d",&NV_Deadline);
-                      T_Deadline[i]=NV_Deadline;
-                       printf("                     _                       \n");
-                       printf("                    |_|_                       \n");
-                       printf("                        |===|>       Edit Succes ^_-\n");Display();break;
-                       }else  printf("id Errour!",id);
-                        }break;}break;
+                ModifyTache();break;
             case 5:
                 system("cls");
                 Supp();break;
             case 6:
                 system("cls");
-                Recherche();
-	               	printf("Choisissez une option : ");
-                     scanf("%d", &choixRecherche);
-                   switch (choixRecherche)
-                    {
-                     case 1:
-                         searchByIdentifiant();break;
-                     case 2:
-                         searchByTitre();break;
-                       default:
-                     printf("Option de recherche invalide!!.\n");}break;
+                Search();break;
             case 7:
                 system("cls");
-                Statistique();
-				printf("Entrer votre choix:");scanf("%d",&choix);
-                switch(choix){
-                case 1 :
-                    staQ_liste_Tache();break;
-                case 2 :
-                    statQ_cmpl_incmpl();break;}
+                Statistique();break;
             case 8:
                 system("cls");
-                printf("                            Au revoir !\n");break;
+                printf("\n");
+                printf("\n");
+                printf("\n");
+                printf("\n");
+                printf("\n");
+                printf("\n");
+                printf("\n");
+                printf("\n");
+                printf("\n");
+                printf("\n");
+                printf("\n");
+                printf("\n");
+                printf("\n");
+                printf("\n");
+                printf("\n");
+                printf("\n");
+                printf("                                                                                                               \n");
+                printf("                                                                                                               \n");
+                printf("                                                                                                               \n");
+                printf("                                                                                                               \n");
+                printf("                                                                                                               \n");
+                printf("                                                                             Au revoir ^_-                     \n");break;
+                
             default:
-                printf("OOOps!!! Veuillez reessayer ^_-\n");
+                printf("       OOOps!!! Veuillez reessayer.\n");
 				  }
             
             }while (choix!=8);
